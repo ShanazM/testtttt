@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Magibook - Interactive Story</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #555e54;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .story-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #e3dfdc;
+            border-radius: 8px;
+        }
+        .story-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .choices {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d6cf8d;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #cfc5b4;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #555e54;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Magibook: Interactive Story</h1>
+        <p>"Whatever your choices are, it will lead to an ending. Choose carefully. Once the story ends, you will be given a quiz to test your English skills."</p>
+    </header>
+
+    <div class="story-container">
+        <h2>Sang Kancil Counts the Crocodiles</h2>
+        <p class="story-text">You are about to start the story of Sang Kancil, the clever mouse-deer. Will he outsmart the crocodile? Choose your actions wisely!</p>
+
+        <div class="choices">
+            <button onclick="startStory()">Start the Story</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Magibook | <a href="javascript:void(0)">Help</a> | <a href="javascript:void(0)">Restart</a> | <a href="javascript:void(0)">Back</a> | <a href="javascript:void(0)">Home</a></p>
+    </footer>
+
+    <script>
+        function startStory() {
+            document.querySelector('.story-text').innerHTML = 'Sang Kancil is hungry and thirsty. What should he do first?';
+            document.querySelector('.choices').innerHTML = `
+                <button onclick="nextChoice('findFood')">Find food first</button>
+                <button onclick="nextChoice('findWater')">Find water first</button>
+            `;
+        }
+
+        function nextChoice(choice) {
+            if (choice === 'findFood') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil decides to find food first. He comes across a wild chestnut tree. What should he do?';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="nextChoice('eatChestnuts')">Eat the chestnuts</button>
+                    <button onclick="nextChoice('keepLooking')">Keep looking for food</button>
+                `;
+            } else if (choice === 'findWater') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil decides to find water first. He walks along the riverbank. Suddenly, a crocodile appears! What will he do?';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="nextChoice('talkToCroc')">Talk to the crocodile</button>
+                    <button onclick="nextChoice('runAway')">Run away</button>
+                `;
+            } else if (choice === 'eatChestnuts') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil eats the chestnuts but feels more hungry. He continues walking.';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="endStory()">End Story</button>
+                `;
+            } else if (choice === 'keepLooking') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil continues to search for food, but it gets late.';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="endStory()">End Story</button>
+                `;
+            } else if (choice === 'talkToCroc') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil talks to the crocodile and convinces it to move aside.';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="endStory()">End Story</button>
+                `;
+            } else if (choice === 'runAway') {
+                document.querySelector('.story-text').innerHTML = 'Sang Kancil runs away, escaping the crocodile!';
+                document.querySelector('.choices').innerHTML = `
+                    <button onclick="endStory()">End Story</button>
+                `;
+            }
+        }
+
+        function endStory() {
+            document.querySelector('.story-text').innerHTML = 'The story ends here. Now, it’s time for your quiz!';
+            document.querySelector('.choices').innerHTML = `
+                <button onclick="startQuiz()">Take the Quiz</button>
+            `;
+        }
+
+        function startQuiz() {
+            document.querySelector('.story-text').innerHTML = 'Quiz Time! Answer the following question: What was the first thing Sang Kancil did in the story?';
+            document.querySelector('.choices').innerHTML = `
+                <button onclick="checkAnswer('findFood')">Find food</button>
+                <button onclick="checkAnswer('findWater')">Find water</button>
+            `;
+        }
+
+        function checkAnswer(answer) {
+            if (answer === 'findFood') {
+                document.querySelector('.story-text').innerHTML = 'Correct! Sang Kancil found food first. Well done!';
+            } else {
+                document.querySelector('.story-text').innerHTML = 'Oops! That\'s not correct. Try again!';
+            }
+            document.querySelector('.choices').innerHTML = `
+                <button onclick="startQuiz()">Retry Quiz</button>
+                <button onclick="endStory()">End</button>
+            `;
+        }
+    </script>
+
+</body>
+</html>
